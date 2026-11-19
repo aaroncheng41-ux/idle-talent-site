@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="台灣中小企業的短期人力媒合平台。填寫需求、查看推薦名單，雙方確認合作條件後才收媒合費。">
+  <title>閒置人力媒合平台（暫名）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+  <style>
+/* Hallmark · shape: Letter adapted to the brief · genre: modern-minimal · theme: Coral (deal 2/3) · job: sign up · draw: b29ff1
+ * hero: Poster · nav: slab with scrollable mobile links · footer: mast · imagery: supplied photographs · signature: the green workshop wall carries the headline
+ * axes: light/roman-serif/warm · posture: restrained · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E4 S4 R4 V4 · weakest: rhythm, distinguish the business feature from the two compact supply entries. */
+:root {
+  --paper: #f8f5ee;
+  --stock: #fffcf5;
+  --board: #203c32;
+  --action: #f4d9a0;
+  --action-hover: #ffeac2;
+  --ink: #21382f;
+  --muted: #4d5d52;
+  --rule: #d1d5c8;
+  --soft: #e9ede2;
+  --light: #fdf9ef;
+  --light-muted: #e1e9da;
+  --accent: #f4d9a0;
+  --focus: #8d4427;
+  --hero-shade: #172d25;
+  --hero-mid: rgb(23 45 37 / 83%);
+  --hero-clear: rgb(23 45 37 / 0%);
+  --icon-fill: none;
+  --icon-stroke: currentColor;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-display: "Noto Serif TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --space-xs: .5rem;
+  --space-sm: .75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 7.5rem;
+  --section-gap: 7.5rem;
+  --gap: clamp(var(--space-lg), 4vw, var(--space-3xl));
+  --gutter: clamp(var(--space-lg), 4.4vw, var(--space-3xl));
+  --container: 1440px;
+  --radius: 8px;
+  --nav-height: 76px;
+  --text-section: clamp(1.95rem, 3.45vw, 3.25rem);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-synthesis: none;
+}
+.container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+h1, h2, h3 {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.22;
+}
+h2 { font-size: var(--text-section); }
+h3 { font-size: clamp(1.25rem, 1.8vw, 1.625rem); }
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; text-underline-offset: .24em; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, summary:focus-visible, main:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+a:active { text-underline-offset: .18em; }
+img { display: block; width: 100%; height: auto; }
+.skip {
+  position: absolute;
+  z-index: 2;
+  transform: translateY(-150%);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--stock);
+}
+.skip:focus-visible { transform: none; }
+.header { border-bottom: 1px solid var(--rule); }
+.header-inner {
+  min-height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+.brand { font-weight: 700; text-decoration: none; }
+.brand:hover { text-decoration-line: underline; }
+.brand small { font-weight: 400; font-size: .875rem; }
+.nav { display: flex; align-items: center; gap: var(--space-xl); }
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: .9375rem;
+}
+.nav a:hover { text-decoration-line: underline; }
+.nav .login {
+  padding-inline: var(--space-md);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+.hero { padding-block: var(--space-lg) 0; }
+.hero-scene {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  min-height: max(540px, calc(100svh - var(--nav-height) - 5.5rem));
+  background: var(--hero-shade);
+  color: var(--light);
+  --focus: var(--accent);
+}
+.hero-scene img, .hero-scene::after { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-scene img { object-fit: cover; object-position: 65% center; z-index: -2; }
+.hero-scene::after {
+  content: "";
+  z-index: -1;
+  background: linear-gradient(90deg, var(--hero-shade), var(--hero-mid) 28%, var(--hero-clear) 68%);
+}
+.hero-copy { padding: var(--space-3xl); }
+h1 { font-size: clamp(3rem, 5.05vw, 5rem); }
+.hero-copy p {
+  max-width: 26em;
+  margin-block: var(--space-lg) var(--space-xl);
+  color: var(--light-muted);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding-inline: var(--space-lg);
+  border: 1px solid var(--board);
+  border-radius: var(--radius);
+  background: var(--action);
+  color: var(--board);
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.button:hover { background: var(--action-hover); text-decoration-line: underline; }
+.button:active { transform: translateY(1px); }
+@media (prefers-reduced-motion: reduce) {
+  .button:active { transform: none; }
+}
+::selection { background: var(--accent); color: var(--ink); }
+.supply-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  padding-block: var(--space-md);
+  color: var(--muted);
+  font-size: .9375rem;
+}
+.supply-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.how { padding-block: var(--section-gap) var(--space-5xl); }
+.steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--gap);
+  padding-inline-start: 0;
+  list-style: none;
+  margin-block: var(--space-2xl) 0;
+}
+.steps li { border-top: 1px solid var(--rule); padding: var(--space-lg) var(--space-xs) 0; }
+.step-title { display: flex; align-items: center; gap: var(--space-sm); }
+.step-number { flex: none; color: var(--muted); font-weight: 700; }
+.step-title svg {
+  flex: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  fill: var(--icon-fill);
+  stroke: var(--icon-stroke);
+  stroke-width: 1.55;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.steps p, .role-copy p { color: var(--muted); margin-top: var(--space-md); }
+.business { background: var(--soft); padding-block: var(--space-4xl); }
+.business-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: var(--gap);
+}
+.business img { aspect-ratio: 4 / 3; object-fit: cover; }
+.role-copy p { max-width: 30em; }
+.role-copy a { margin-top: var(--space-lg); }
+.supply { padding-block: var(--space-4xl) var(--space-5xl); }
+.supply-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: center;
+  gap: var(--gap);
+  padding-block: var(--space-xl);
+  border-block-start: 1px solid var(--rule);
+}
+.supply-row:last-child { border-block-end: 1px solid var(--rule); }
+.supply-row img { aspect-ratio: 4 / 3; object-fit: cover; }
+.supply-row .role-copy { padding-block: var(--space-xs); }
+.supply-row a { display: inline-block; font-weight: 700; }
+.pricing {
+  background: var(--board);
+  color: var(--light);
+  padding-block: var(--space-4xl);
+}
+.pricing-grid, .faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: var(--gap);
+  align-items: start;
+}
+.pricing h2 { max-width: 9em; }
+.invoice {
+  margin: 0;
+  padding: var(--space-xl);
+  background: var(--stock);
+  color: var(--ink);
+}
+.invoice div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+  gap: var(--gap);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+.invoice div:first-child { padding-top: 0; }
+.invoice div:last-child { border-bottom: 0; padding-bottom: 0; }
+.invoice dt { font-weight: 700; }
+.invoice dd { margin: 0; color: var(--muted); }
+.faq { padding-block: var(--space-5xl); }
+details { border-block-start: 1px solid var(--rule); }
+details:last-child { border-block-end: 1px solid var(--rule); }
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-height: 48px;
+  padding: var(--space-md) var(--space-xs);
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+" / ""; font-size: 1.375rem; font-weight: 400; }
+details[open] summary::after { content: "−" / ""; }
+summary:hover { background: var(--soft); }
+summary:active { color: var(--muted); }
+details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
+.footer { background: var(--soft); padding-block: var(--space-3xl); }
+.footer .brand { font-size: clamp(1.125rem, 2vw, 1.5rem); }
+.legal { display: flex; gap: var(--space-lg); margin-top: var(--space-lg); font-size: .9375rem; }
+.legal a { white-space: nowrap; }
+@media (max-width: 900px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .header-inner { align-items: flex-start; flex-direction: column; gap: var(--space-xs); padding-block: var(--space-sm) var(--space-xs); }
+  .nav { width: 100%; overflow-x: auto; gap: var(--space-md); padding: var(--space-xs); scrollbar-color: var(--muted) var(--paper); }
+  .nav a { flex: none; }
+  .nav .login { padding-inline: var(--space-xs); }
+  .hero { padding-block: var(--space-md) 0; }
+  .hero-scene { min-height: 0; }
+  .hero-scene img { position: static; height: auto; aspect-ratio: 4 / 3; object-position: 78% center; }
+  .hero-scene::after { content: none; }
+  .hero-copy { grid-row: 1; padding: var(--space-xl) var(--space-lg); }
+  h1 { font-size: clamp(2.375rem, 8vw, 3.5rem); }
+  .hero-copy p { margin-block: var(--space-md) var(--space-lg); }
+  .how, .business, .supply, .pricing, .faq { padding-block: var(--space-3xl); }
+  .how { padding-block-start: calc(var(--section-gap) * .6); }
+  .business-grid, .supply-row, .pricing-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .steps { margin-top: var(--space-xl); }
+  .supply-row .role-copy { grid-row: 1; }
+  .invoice { padding: var(--space-lg); }
+  .invoice div { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
+}
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">跳至主要內容</a>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">閒置人力媒合平台 <small>（暫名）</small></a>
+      <nav class="nav" aria-label="主要導覽">
+        <a href="#how">媒合流程</a>
+        <a href="#pricing">收費方式</a>
+        <a href="#faq">常見問題</a>
+        <a class="login" href="login.html">會員登入</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-scene">
+        <img src="assets/hero.jpg" width="1280" height="720" alt="三人在綠色牆面前圍桌討論工作" fetchpriority="high">
+        <div class="hero-copy">
+          <h1 id="hero-title">短期缺人，<br>找對的幫手</h1>
+          <p>為台灣中小企業媒合有空檔的專業人士與企業淡季人力。</p>
+          <a class="button" href="#start">提出短期人力需求</a>
+        </div>
+      </div>
+      <nav class="supply-links" aria-label="供給方快速入口">
+        <a href="#pros">我是有空檔的專業人士</a>
+        <a href="#companies">我是企業，想釋出淡季人力</a>
+      </nav>
+    </section>
+    <section class="how container" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">自動配對怎麼運作？</h2>
+      <ol class="steps" role="list">
+        <li>
+          <div class="step-title">
+            <span class="step-number" aria-hidden="true">1.</span>
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 7H7a2 2 0 0 0-2 2v19a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4M11 6h2a3 3 0 0 1 6 0h2v5H11zM10 16h2m4 0h6m-12 5h2m4 0h6m-12 5h2m4 0h6"/></svg>
+            <h3>填寫短期需求</h3>
+          </div>
+          <p>業者登入後，填寫工作技能、時段、地點、人數與預算。</p>
+        </li>
+        <li>
+          <div class="step-title">
+            <span class="step-number" aria-hidden="true">2.</span>
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15 6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h9m0-20h8a2 2 0 0 1 2 2v5a3.2 3.2 0 1 1 0 6v5a2 2 0 0 1-2 2h-8m0-20v7a3.2 3.2 0 1 0 0 6v7"/></svg>
+            <h3>查看推薦並邀請</h3>
+          </div>
+          <p>系統依這五項條件比對、評分並排序，業者可從推薦名單送出邀請。</p>
+        </li>
+        <li>
+          <div class="step-title">
+            <span class="step-number" aria-hidden="true">3.</span>
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m2 15 5-8 4 2-5 9zm28 0-5-8-4 2 5 9zM11 10l4-1m7 2-5-2c-1 0-2 0-3 1l-4 4c-1 2 1 3 3 2l3-2 7 6c2 2 0 4-2 3m-3-3 3 3c1 1 0 3-2 3l-4-3m4 3c0 2-2 2-4 1L7 18m16 2 3-3"/></svg>
+            <h3>雙方確認後成立</h3>
+          </div>
+          <p>供給方接受邀請，雙方確認合作條件後，配對才算成功。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="business" id="start" aria-labelledby="business-title">
+      <div class="container business-grid">
+        <div class="role-copy">
+          <h2 id="business-title">給需要短期人力的業者</h2>
+          <p>旺季加班次、活動需支援，或專案需要特定技能時，都可以發布需求，再邀請合適的人選。</p>
+          <a class="button" href="signup.html?role=business">提出短期人力需求</a>
+        </div>
+        <img src="assets/demand.jpg" width="1152" height="864" alt="業者在忙碌的工坊裡查看平板" loading="lazy">
+      </div>
+    </section>
+
+    <div class="supply container">
+      <section class="supply-row" id="pros" aria-labelledby="pro-title">
+        <img src="assets/supply-pro.jpg" width="1152" height="864" alt="專業人士在咖啡店使用筆電工作" loading="lazy">
+        <div class="role-copy">
+          <h2 id="pro-title">給有空檔的專業人士</h2>
+          <p>建立個人檔案，填寫技能、可接時段、地點與時薪範圍。有合適的邀請時，由你決定是否接受。</p>
+          <a href="signup.html?role=professional">我是有空檔的專業人士</a>
+        </div>
+      </section>
+      <section class="supply-row" id="companies" aria-labelledby="company-title">
+        <img src="assets/supply-company.jpg" width="1152" height="864" alt="主管在淡季的辦公室裡與同仁談話" loading="lazy">
+        <div class="role-copy">
+          <h2 id="company-title">給有淡季人力的企業</h2>
+          <p>登錄可支援的職能、人數、期間與地點，收到邀請後再評估能否安排同仁支援。</p>
+          <a href="signup.html?role=company">我是企業，想釋出淡季人力</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container pricing-grid">
+        <h2 id="pricing-title">配對成功<br>才付費</h2>
+        <dl class="invoice">
+          <div>
+            <dt>何時收費</dt>
+            <dd>供給方接受邀請、雙方確認條件後，平台才向提出需求的業者開立媒合費帳單。費率於帳單上列明。</dd>
+          </div>
+          <div>
+            <dt>如何付款</dt>
+            <dd>第一版採銀行轉帳，請依帳單資訊付款。</dd>
+          </div>
+          <div>
+            <dt>何時能聯絡</dt>
+            <dd>平台確認入帳後，才會向雙方開放聯絡方式。</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="faq container" id="faq" aria-labelledby="faq-title">
+      <div class="faq-grid">
+        <h2 id="faq-title">常見問題</h2>
+        <div>
+          <details>
+            <summary>需要註冊會員才能使用嗎？</summary>
+            <p>需要。註冊時可選擇提出需求的業者、有空檔的專業人士或釋出淡季人力的企業。登入後即可發布需求或登錄可提供的人力。</p>
+          </details>
+          <details>
+            <summary>業者可以找一人或多人嗎？</summary>
+            <p>可以。填寫需求時請填上所需人數，系統會將人數與其他條件一起納入比對。</p>
+          </details>
+          <details>
+            <summary>推薦的人選一定會接受邀請嗎？</summary>
+            <p>供給方可自行決定是否接受。如果對方婉拒，業者可以回到推薦名單邀請其他人選。</p>
+          </details>
+          <details>
+            <summary>供給方也要付媒合費嗎？</summary>
+            <p>媒合費由提出需求的業者支付，專業人士與釋出淡季人力的企業無須支付。</p>
+          </details>
+          <details>
+            <summary>刊登需求或送出邀請時就會收費嗎？</summary>
+            <p>刊登需求與送出邀請都不收媒合費，等配對成功後才會開立帳單。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <a class="brand" href="#top">閒置人力媒合平台 <small>（暫名）</small></a>
+      <nav class="legal" aria-label="網站條款">
+        <a href="terms.html">服務條款</a>
+        <a href="privacy.html">隱私權政策</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

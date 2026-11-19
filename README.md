@@ -1,1 +1,1 @@
-# idle-talent-site
+閒置人力資源媒合平台（課堂練習專案）首頁，靜態網站，以 GitHub Pages 發布。
