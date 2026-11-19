@@ -85,7 +85,7 @@ a:active { text-underline-offset: .18em; }
 img { display: block; width: 100%; height: auto; }
 .skip {
   position: absolute;
-  z-index: 2;
+  z-index: 30;
   transform: translateY(-150%);
   padding: var(--space-sm) var(--space-md);
   background: var(--stock);
@@ -296,6 +296,150 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
   .invoice div { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
 }
 .hero-copy { position: relative; z-index: 1; }
+/* ===== v5 redesign: marketplace patterns (dual-role hero search, trust strip, category grid,
+   tabbed how-it-works, role cards, plan-style pricing, proof, FAQ, CTA band, mega footer) ===== */
+.header { position: sticky; top: 0; z-index: 20; background: rgb(248 245 238 / 94%); backdrop-filter: blur(6px); }
+.nav .cta-small { padding-inline: var(--space-md); border-radius: var(--radius); background: var(--board); color: var(--light); font-weight: 700; }
+.nav .cta-small:hover { background: var(--ink); }
+.eyebrow { display: inline-block; margin-bottom: var(--space-sm); color: var(--muted); font-size: .875rem; font-weight: 700; letter-spacing: .08em; }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-md) var(--gap); }
+.section-head p { max-width: 34em; color: var(--muted); }
+.placeholder-tag { display: inline-block; padding: 0 .5em; border: 1px dashed currentColor; border-radius: 4px; font-size: .75rem; font-weight: 700; letter-spacing: .04em; vertical-align: middle; }
+
+/* hero: role tabs + search panel */
+.hero-copy { max-width: 40rem; }
+.hero-copy h1 { margin-top: var(--space-xs); }
+.role-tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; margin-top: var(--space-lg); border-radius: 999px; background: rgb(253 249 239 / 12%); border: 1px solid rgb(253 249 239 / 22%); }
+.role-tabs button { min-height: 44px; padding-inline: var(--space-md); border: 0; border-radius: 999px; background: transparent; color: var(--light-muted); font: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; }
+.role-tabs button[aria-selected="true"] { background: var(--light); color: var(--board); }
+.role-tabs button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.role-panel { margin-top: var(--space-md); }
+.role-panel[hidden] { display: none; }
+.role-panel > p { color: var(--light-muted); max-width: 30em; margin-bottom: var(--space-md); }
+.search-box { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) auto; gap: 6px; padding: 6px; border-radius: calc(var(--radius) + 4px); background: var(--light); box-shadow: 0 10px 30px rgb(0 0 0 / 25%); }
+.search-box label { display: grid; padding: 4px 10px; color: var(--muted); font-size: .75rem; font-weight: 700; }
+.search-box input, .search-box select { min-height: 32px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 1rem; font-weight: 400; }
+.search-box input:focus-visible, .search-box select:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.search-box label + label { border-left: 1px solid var(--rule); }
+.search-box .button { min-height: 52px; border-color: var(--board); background: var(--board); color: var(--light); }
+.search-box .button:hover { background: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs); margin-top: var(--space-md); color: var(--light-muted); font-size: .875rem; }
+.chips a { display: inline-flex; align-items: center; min-height: 36px; padding-inline: .85em; border: 1px solid rgb(253 249 239 / 35%); border-radius: 999px; text-decoration: none; }
+.chips a:hover { background: rgb(253 249 239 / 14%); }
+.role-panel .button-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.button.ghost { background: transparent; color: var(--light); border-color: rgb(253 249 239 / 60%); }
+.button.ghost:hover { background: rgb(253 249 239 / 12%); }
+
+/* trust strip */
+.promise { border-bottom: 1px solid var(--rule); }
+.promise ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); margin: 0; padding: var(--space-lg) 0; list-style: none; }
+.promise li { display: flex; align-items: center; gap: var(--space-sm); font-weight: 700; font-size: .9375rem; }
+.promise svg, .card-icon { flex: none; width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* categories */
+.categories { padding-block: var(--space-4xl) var(--space-3xl); }
+.cat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); margin: var(--space-2xl) 0 0; padding: 0; list-style: none; }
+.cat-grid a { display: grid; gap: var(--space-xs); height: 100%; padding: var(--space-lg); border: 1px solid var(--rule); border-radius: calc(var(--radius) + 4px); background: var(--stock); text-decoration: none; transition: border-color .15s, transform .15s; }
+.cat-grid a:hover { border-color: var(--board); transform: translateY(-2px); }
+.cat-grid .card-icon { width: 2.25rem; height: 2.25rem; color: var(--board); }
+.cat-grid strong { font-size: 1.0625rem; }
+.cat-grid span { color: var(--muted); font-size: .875rem; }
+@media (prefers-reduced-motion: reduce) { .cat-grid a { transition: none; } .cat-grid a:hover { transform: none; } }
+
+/* how it works with tabs */
+.how { padding-block: var(--space-4xl); background: var(--soft); }
+.how-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--stock); border: 1px solid var(--rule); }
+.how-tabs button { min-height: 44px; padding-inline: var(--space-lg); border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-weight: 700; cursor: pointer; }
+.how-tabs button[aria-selected="true"] { background: var(--board); color: var(--light); }
+.how-tabs button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.how .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); counter-reset: none; }
+.how .steps li { padding: var(--space-xl); border: 0; border-radius: calc(var(--radius) + 4px); background: var(--stock); }
+.how [role="tabpanel"][hidden] { display: none; }
+
+/* role cards */
+.roles { padding-block: var(--space-4xl); }
+.role-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); margin-top: var(--space-2xl); }
+.role-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--rule); border-radius: calc(var(--radius) + 4px); background: var(--stock); }
+.role-card img { aspect-ratio: 4 / 3; object-fit: cover; }
+.role-card .body { display: flex; flex: 1; flex-direction: column; gap: var(--space-sm); padding: var(--space-xl); }
+.role-card ul { margin: 0; padding-left: 1.2em; color: var(--muted); }
+.role-card .button { align-self: flex-start; margin-top: auto; }
+.role-card.featured { border-color: var(--board); box-shadow: 0 0 0 1px var(--board); }
+.role-card .tag { align-self: flex-start; padding: 0 .6em; border-radius: 999px; background: var(--accent); color: var(--board); font-size: .8125rem; font-weight: 700; }
+
+/* value props */
+.values { padding-block: var(--space-3xl) var(--space-4xl); }
+.value-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-lg); margin: var(--space-2xl) 0 0; padding: 0; list-style: none; }
+.value-grid li { padding-top: var(--space-lg); border-top: 2px solid var(--board); }
+.value-grid h3 { font-size: 1.1875rem; margin-block: var(--space-sm) var(--space-xs); }
+.value-grid p { color: var(--muted); font-size: .9375rem; }
+
+/* pricing as plan cards */
+.pricing { padding-block: var(--space-4xl); }
+.plan-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: var(--space-lg); margin-top: var(--space-2xl); }
+.plan { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-xl); border-radius: calc(var(--radius) + 4px); background: var(--stock); color: var(--ink); }
+.plan.main { outline: 3px solid var(--accent); }
+.plan .price { font-family: var(--font-display); font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
+.plan ul { margin: 0; padding-left: 1.2em; color: var(--muted); }
+.plan .note { color: var(--muted); font-size: .875rem; }
+.pay-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); margin: var(--space-2xl) 0 0; padding: 0; list-style: none; color: var(--light-muted); }
+.pay-flow strong { display: block; color: var(--light); }
+
+/* proof (placeholders) */
+.proof { padding-block: var(--space-4xl); }
+.stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); margin: var(--space-2xl) 0; padding: 0; list-style: none; }
+.stat-grid li { padding: var(--space-xl); border: 1px dashed var(--muted); border-radius: calc(var(--radius) + 4px); }
+.stat-grid b { display: block; font-family: var(--font-display); font-size: clamp(2rem, 3.4vw, 3rem); color: var(--board); }
+.quote-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+.quote-grid figure { margin: 0; padding: var(--space-xl); border: 1px dashed var(--muted); border-radius: calc(var(--radius) + 4px); background: var(--stock); }
+.quote-grid blockquote { margin: 0 0 var(--space-md); font-size: 1.0625rem; }
+.quote-grid figcaption { color: var(--muted); font-size: .875rem; }
+
+/* faq */
+.faq { padding-block: var(--space-4xl); background: var(--soft); }
+.faq-aside p { margin-top: var(--space-md); color: var(--muted); }
+.faq-aside .button { margin-top: var(--space-lg); }
+
+/* final CTA band */
+.cta-band { background: var(--hero-shade); color: var(--light); }
+.cta-band .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-lg); padding-block: var(--space-3xl); }
+.cta-band p { color: var(--light-muted); margin-top: var(--space-xs); }
+.cta-band .button-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+/* mega footer */
+.footer { background: var(--board); color: var(--light-muted); padding-block: var(--space-3xl) var(--space-xl); }
+.footer .brand { color: var(--light); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.footer-grid h2 { font-family: var(--font-body); font-size: .9375rem; color: var(--light); margin-bottom: var(--space-sm); }
+.footer-grid ul { margin: 0; padding: 0; list-style: none; }
+.footer-grid li a { display: inline-flex; min-height: 36px; align-items: center; font-size: .9375rem; text-decoration: none; }
+.footer-grid li a:hover { text-decoration: underline; }
+.footer-grid p { margin-top: var(--space-sm); font-size: .9375rem; }
+.footer .legal { justify-content: space-between; flex-wrap: wrap; margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid rgb(253 249 239 / 18%); }
+.footer a:focus-visible { outline-color: var(--accent); }
+
+@media (max-width: 1100px) {
+  .cat-grid, .value-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .role-grid, .plan-grid { grid-template-columns: minmax(0, 1fr); }
+  .promise ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .nav .cta-small { display: none; }
+  .search-box { grid-template-columns: minmax(0, 1fr); }
+  .search-box label + label { border-left: 0; border-top: 1px solid var(--rule); }
+  .how .steps, .pay-flow, .stat-grid, .quote-grid { grid-template-columns: minmax(0, 1fr); }
+  .categories, .how, .roles, .values, .pricing, .proof, .faq { padding-block: var(--space-3xl); }
+  .cat-grid { gap: var(--space-sm); }
+  .cat-grid a { padding: var(--space-md); }
+  .header { position: static; }
+  .role-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; border-radius: var(--radius); }
+  .role-tabs button { padding-inline: 4px; border-radius: 6px; font-size: .875rem; }
+  .search-box .button { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .value-grid, .promise ul, .footer-grid { grid-template-columns: minmax(0, 1fr); }
+}
   </style>
 </head>
 <body id="top">
@@ -304,10 +448,12 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
     <div class="container header-inner">
       <a class="brand" href="#top">閒置人力媒合平台 <small>（暫名）</small></a>
       <nav class="nav" aria-label="主要導覽">
+        <a href="#categories">服務類別</a>
         <a href="#how">媒合流程</a>
         <a href="#pricing">收費方式</a>
         <a href="#faq">常見問題</a>
         <a class="login" href="login.html">會員登入</a>
+        <a class="cta-small" href="#start">提出需求</a>
       </nav>
     </div>
   </header>
@@ -317,98 +463,256 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
         <img src="assets/hero.jpg" width="1280" height="720" alt="三人在綠色牆面前圍桌討論工作" fetchpriority="high">
         <div class="hero-copy">
           <h1 id="hero-title">短期缺人，<br>找對的幫手</h1>
-          <p>為台灣中小企業媒合有空檔的專業人士與企業淡季人力。</p>
-          <a class="button" href="#start">提出短期人力需求</a>
+          <div class="role-tabs" role="tablist" aria-label="選擇你的身分">
+            <button type="button" role="tab" id="tab-biz" aria-controls="panel-biz" aria-selected="true">我要找人</button>
+            <button type="button" role="tab" id="tab-pro" aria-controls="panel-pro" aria-selected="false" tabindex="-1">我有空檔</button>
+            <button type="button" role="tab" id="tab-co" aria-controls="panel-co" aria-selected="false" tabindex="-1">我有淡季人力</button>
+          </div>
+          <div class="role-panel" id="panel-biz" role="tabpanel" aria-labelledby="tab-biz">
+            <p>為台灣中小企業媒合有空檔的專業人士與企業淡季人力。</p>
+            <form class="search-box" action="signup.html" method="get" role="search" aria-label="提出短期人力需求">
+              <input type="hidden" name="role" value="business">
+              <label>需要什麼技能
+                <input type="text" name="skill" placeholder="例如：活動支援、記帳、平面設計" autocomplete="off">
+              </label>
+              <label>工作地點
+                <select name="area">
+                  <option value="">不限地區</option>
+                  <option>臺北市</option><option>新北市</option><option>桃園市</option><option>臺中市</option>
+                  <option>臺南市</option><option>高雄市</option><option>其他縣市</option><option>可遠端</option>
+                </select>
+              </label>
+              <button class="button" type="submit">開始配對</button>
+            </form>
+            <div class="chips"><span>熱門需求：</span>
+              <a href="#cat-event">活動支援</a><a href="#cat-retail">門市支援</a><a href="#cat-finance">記帳報稅</a><a href="#cat-design">設計行銷</a>
+            </div>
+          </div>
+          <div class="role-panel" id="panel-pro" role="tabpanel" aria-labelledby="tab-pro" hidden>
+            <p>建立個人檔案，填寫技能、可接時段、地點與時薪範圍。有合適的邀請時，由你決定是否接受。</p>
+            <div class="button-row">
+              <a class="button" href="signup.html?role=professional">建立個人檔案</a>
+              <a class="button ghost" href="#roles">了解供給方</a>
+            </div>
+          </div>
+          <div class="role-panel" id="panel-co" role="tabpanel" aria-labelledby="tab-co" hidden>
+            <p>登錄可支援的職能、人數、期間與地點，收到邀請後再評估能否安排同仁支援。</p>
+            <div class="button-row">
+              <a class="button" href="signup.html?role=company">登錄淡季人力</a>
+              <a class="button ghost" href="#roles">了解供給方</a>
+            </div>
+          </div>
         </div>
-      </div>
-      <nav class="supply-links" aria-label="供給方快速入口">
-        <a href="#pros">我是有空檔的專業人士</a>
-        <a href="#companies">我是企業，想釋出淡季人力</a>
-      </nav>
-    </section>
-    <section class="how container" id="how" aria-labelledby="how-title">
-      <h2 id="how-title">自動配對怎麼運作？</h2>
-      <ol class="steps" role="list">
-        <li>
-          <div class="step-title">
-            <span class="step-number" aria-hidden="true">1.</span>
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 7H7a2 2 0 0 0-2 2v19a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4M11 6h2a3 3 0 0 1 6 0h2v5H11zM10 16h2m4 0h6m-12 5h2m4 0h6m-12 5h2m4 0h6"/></svg>
-            <h3>填寫短期需求</h3>
-          </div>
-          <p>業者登入後，填寫工作技能、時段、地點、人數與預算。</p>
-        </li>
-        <li>
-          <div class="step-title">
-            <span class="step-number" aria-hidden="true">2.</span>
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15 6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h9m0-20h8a2 2 0 0 1 2 2v5a3.2 3.2 0 1 1 0 6v5a2 2 0 0 1-2 2h-8m0-20v7a3.2 3.2 0 1 0 0 6v7"/></svg>
-            <h3>查看推薦並邀請</h3>
-          </div>
-          <p>系統依這五項條件比對、評分並排序，業者可從推薦名單送出邀請。</p>
-        </li>
-        <li>
-          <div class="step-title">
-            <span class="step-number" aria-hidden="true">3.</span>
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m2 15 5-8 4 2-5 9zm28 0-5-8-4 2 5 9zM11 10l4-1m7 2-5-2c-1 0-2 0-3 1l-4 4c-1 2 1 3 3 2l3-2 7 6c2 2 0 4-2 3m-3-3 3 3c1 1 0 3-2 3l-4-3m4 3c0 2-2 2-4 1L7 18m16 2 3-3"/></svg>
-            <h3>雙方確認後成立</h3>
-          </div>
-          <p>供給方接受邀請，雙方確認合作條件後，配對才算成功。</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="business" id="start" aria-labelledby="business-title">
-      <div class="container business-grid">
-        <div class="role-copy">
-          <h2 id="business-title">給需要短期人力的業者</h2>
-          <p>旺季加班次、活動需支援，或專案需要特定技能時，都可以發布需求，再邀請合適的人選。</p>
-          <a class="button" href="signup.html?role=business">提出短期人力需求</a>
-        </div>
-        <img src="assets/demand.jpg" width="1152" height="864" alt="業者在忙碌的工坊裡查看平板" loading="lazy">
       </div>
     </section>
 
-    <div class="supply container">
-      <section class="supply-row" id="pros" aria-labelledby="pro-title">
-        <img src="assets/supply-pro.jpg" width="1152" height="864" alt="專業人士在咖啡店使用筆電工作" loading="lazy">
-        <div class="role-copy">
-          <h2 id="pro-title">給有空檔的專業人士</h2>
-          <p>建立個人檔案，填寫技能、可接時段、地點與時薪範圍。有合適的邀請時，由你決定是否接受。</p>
-          <a href="signup.html?role=professional">我是有空檔的專業人士</a>
+    <section class="promise container" aria-label="平台承諾">
+      <ul role="list">
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 16l6 6L26 8"/></svg>刊登需求免費</li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h22v14H5zM5 14h22M10 19h4"/></svg>配對成功才收費</li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4a6 6 0 1 1 0 12a6 6 0 0 1 0-12zM6 28c0-6 4-9 10-9s10 3 10 9"/></svg>供給方免付媒合費</li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 14V10a7 7 0 0 1 14 0v4M7 14h18v14H7zM16 20v3"/></svg>入帳後才開放聯絡</li>
+      </ul>
+    </section>
+
+    <section class="categories container" id="categories" aria-labelledby="cat-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">依職能找人力</span>
+          <h2 id="cat-title">你需要哪一種幫手？</h2>
         </div>
-      </section>
-      <section class="supply-row" id="companies" aria-labelledby="company-title">
-        <img src="assets/supply-company.jpg" width="1152" height="864" alt="主管在淡季的辦公室裡與同仁談話" loading="lazy">
-        <div class="role-copy">
-          <h2 id="company-title">給有淡季人力的企業</h2>
-          <p>登錄可支援的職能、人數、期間與地點，收到邀請後再評估能否安排同仁支援。</p>
-          <a href="signup.html?role=company">我是企業，想釋出淡季人力</a>
+        <p>選一個職能開始填寫需求，系統會依技能、時段、地點、人數與預算替你比對人選。</p>
+      </div>
+      <ul class="cat-grid" role="list">
+        <li><a id="cat-event" href="signup.html?role=business&amp;cat=event"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 26h24M7 26V12l9-6 9 6v14M13 26v-7h6v7"/></svg><strong>活動與展場</strong><span>展覽、快閃、記者會人力</span></a></li>
+        <li><a id="cat-retail" href="signup.html?role=business&amp;cat=retail"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12l2-6h18l2 6M5 12h22v14H5zM12 26v-7h8v7"/></svg><strong>門市與餐飲</strong><span>旺季排班、假日支援</span></a></li>
+        <li><a href="signup.html?role=business&amp;cat=logistics"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 9h16v13H3zM19 13h6l4 5v4h-10M8 26a2 2 0 1 0 0-4a2 2 0 0 0 0 4zM24 26a2 2 0 1 0 0-4a2 2 0 0 0 0 4z"/></svg><strong>倉儲與物流</strong><span>理貨、包裝、出貨高峰</span></a></li>
+        <li><a href="signup.html?role=business&amp;cat=admin"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6h20v20H6zM10 12h12M10 17h12M10 22h7"/></svg><strong>行政與客服</strong><span>資料建檔、電話客服</span></a></li>
+        <li><a id="cat-finance" href="signup.html?role=business&amp;cat=finance"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 4h18v24H7zM11 9h10M11 15h2m4 0h4m-10 5h2m4 0h4"/></svg><strong>財務與會計</strong><span>記帳、報稅季支援</span></a></li>
+        <li><a id="cat-design" href="signup.html?role=business&amp;cat=design"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27l4-1 16-16-3-3L6 23zM19 10l3 3"/></svg><strong>設計與行銷</strong><span>平面、社群、文案</span></a></li>
+        <li><a href="signup.html?role=business&amp;cat=it"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 7h24v15H4zM12 27h8M16 22v5M12 12l-3 3 3 3M20 12l3 3-3 3"/></svg><strong>資訊與工程</strong><span>網站維護、系統導入</span></a></li>
+        <li><a href="signup.html?role=business&amp;cat=consult"><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22v14H14l-6 5v-5H5z"/></svg><strong>專業顧問</strong><span>法務、人資、營運諮詢</span></a></li>
+      </ul>
+    </section>
+
+    <section class="how" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">自動配對</span>
+            <h2 id="how-title">自動配對怎麼運作？</h2>
+          </div>
+          <div class="how-tabs" role="tablist" aria-label="選擇流程">
+            <button type="button" role="tab" id="htab-biz" aria-controls="hpanel-biz" aria-selected="true">業者找人</button>
+            <button type="button" role="tab" id="htab-sup" aria-controls="hpanel-sup" aria-selected="false" tabindex="-1">供給方接案</button>
+          </div>
         </div>
-      </section>
-    </div>
+        <div id="hpanel-biz" role="tabpanel" aria-labelledby="htab-biz">
+          <ol class="steps" role="list">
+            <li>
+              <div class="step-title">
+                <span class="step-number" aria-hidden="true">1.</span>
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 7H7a2 2 0 0 0-2 2v19a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-4M11 6h2a3 3 0 0 1 6 0h2v5H11zM10 16h2m4 0h6m-12 5h2m4 0h6m-12 5h2m4 0h6"/></svg>
+                <h3>填寫短期需求</h3>
+              </div>
+              <p>業者登入後，填寫工作技能、時段、地點、人數與預算。</p>
+            </li>
+            <li>
+              <div class="step-title">
+                <span class="step-number" aria-hidden="true">2.</span>
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M15 6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h9m0-20h8a2 2 0 0 1 2 2v5a3.2 3.2 0 1 1 0 6v5a2 2 0 0 1-2 2h-8m0-20v7a3.2 3.2 0 1 0 0 6v7"/></svg>
+                <h3>查看推薦並邀請</h3>
+              </div>
+              <p>系統依這五項條件比對、評分並排序，業者可從推薦名單送出邀請。</p>
+            </li>
+            <li>
+              <div class="step-title">
+                <span class="step-number" aria-hidden="true">3.</span>
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m2 15 5-8 4 2-5 9zm28 0-5-8-4 2 5 9zM11 10l4-1m7 2-5-2c-1 0-2 0-3 1l-4 4c-1 2 1 3 3 2l3-2 7 6c2 2 0 4-2 3m-3-3 3 3c1 1 0 3-2 3l-4-3m4 3c0 2-2 2-4 1L7 18m16 2 3-3"/></svg>
+                <h3>雙方確認後成立</h3>
+              </div>
+              <p>供給方接受邀請，雙方確認合作條件後，配對才算成功。</p>
+            </li>
+          </ol>
+        </div>
+        <div id="hpanel-sup" role="tabpanel" aria-labelledby="htab-sup" hidden>
+          <ol class="steps" role="list">
+            <li>
+              <div class="step-title"><span class="step-number" aria-hidden="true">1.</span><h3>建立檔案或登錄人力</h3></div>
+              <p>專業人士填寫技能、可接時段、地點與時薪範圍；企業登錄可支援的職能、人數、期間與地點。</p>
+            </li>
+            <li>
+              <div class="step-title"><span class="step-number" aria-hidden="true">2.</span><h3>收到業者邀請</h3></div>
+              <p>條件相符時，你會出現在業者的推薦名單中，並收到邀請。</p>
+            </li>
+            <li>
+              <div class="step-title"><span class="step-number" aria-hidden="true">3.</span><h3>由你決定是否接受</h3></div>
+              <p>可以接受或婉拒。接受並確認合作條件後配對成立，供給方無須支付媒合費。</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="roles container" id="roles" aria-labelledby="roles-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">三種身分，一個平台</span>
+          <h2 id="roles-title">選擇你的入口</h2>
+        </div>
+      </div>
+      <div class="role-grid">
+        <article class="role-card featured" id="start" aria-labelledby="business-title">
+          <img src="assets/demand.jpg" width="1152" height="864" alt="業者在忙碌的工坊裡查看平板" loading="lazy">
+          <div class="body">
+            <span class="tag">需求方</span>
+            <h3 id="business-title">給需要短期人力的業者</h3>
+            <p>旺季加班次、活動需支援，或專案需要特定技能時，都可以發布需求，再邀請合適的人選。</p>
+            <ul><li>可找一人或多人</li><li>刊登與邀請不收費</li></ul>
+            <a class="button" href="signup.html?role=business">提出短期人力需求</a>
+          </div>
+        </article>
+        <article class="role-card" id="pros" aria-labelledby="pro-title">
+          <img src="assets/supply-pro.jpg" width="1152" height="864" alt="專業人士在咖啡店使用筆電工作" loading="lazy">
+          <div class="body">
+            <span class="tag">供給方</span>
+            <h3 id="pro-title">給有空檔的專業人士</h3>
+            <p>建立個人檔案，填寫技能、可接時段、地點與時薪範圍。有合適的邀請時，由你決定是否接受。</p>
+            <ul><li>自己決定接不接</li><li>無須支付媒合費</li></ul>
+            <a class="button" href="signup.html?role=professional">我是有空檔的專業人士</a>
+          </div>
+        </article>
+        <article class="role-card" id="companies" aria-labelledby="company-title">
+          <img src="assets/supply-company.jpg" width="1152" height="864" alt="主管在淡季的辦公室裡與同仁談話" loading="lazy">
+          <div class="body">
+            <span class="tag">供給方</span>
+            <h3 id="company-title">給有淡季人力的企業</h3>
+            <p>登錄可支援的職能、人數、期間與地點，收到邀請後再評估能否安排同仁支援。</p>
+            <ul><li>先評估再安排</li><li>無須支付媒合費</li></ul>
+            <a class="button" href="signup.html?role=company">我是企業，想釋出淡季人力</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="values container" aria-labelledby="values-title">
+      <span class="eyebrow">為什麼用這個平台</span>
+      <h2 id="values-title">讓短期合作更簡單</h2>
+      <ul class="value-grid" role="list">
+        <li><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M14 22a8 8 0 1 0 0-16a8 8 0 0 0 0 16zM20 20l7 7"/></svg><h3>五項條件自動比對</h3><p>技能、時段、地點、人數與預算一起評分排序，不必自己逐一篩選。</p></li>
+        <li><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16l5 5 9-10M14 21l2 2 12-14"/></svg><h3>雙方確認才成立</h3><p>供給方接受邀請、雙方確認合作條件後，配對才算成功。</p></li>
+        <li><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h22v14H5zM5 14h22M10 19h4"/></svg><h3>配對成功才付費</h3><p>刊登需求與送出邀請都不收媒合費，成功後才開立帳單。</p></li>
+        <li><svg class="card-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 14V10a7 7 0 0 1 14 0v4M7 14h18v14H7zM16 20v3"/></svg><h3>入帳後開放聯絡</h3><p>平台確認入帳後，才向雙方開放聯絡方式，保護雙方資料。</p></li>
+      </ul>
+    </section>
 
     <section class="pricing" id="pricing" aria-labelledby="pricing-title">
-      <div class="container pricing-grid">
-        <h2 id="pricing-title">配對成功<br>才付費</h2>
-        <dl class="invoice">
-          <div>
-            <dt>何時收費</dt>
-            <dd>供給方接受邀請、雙方確認條件後，平台才向提出需求的業者開立媒合費帳單。費率於帳單上列明。</dd>
-          </div>
-          <div>
-            <dt>如何付款</dt>
-            <dd>第一版採銀行轉帳，請依帳單資訊付款。</dd>
-          </div>
-          <div>
-            <dt>何時能聯絡</dt>
-            <dd>平台確認入帳後，才會向雙方開放聯絡方式。</dd>
-          </div>
-        </dl>
+      <div class="container">
+        <span class="eyebrow" style="color: var(--light-muted)">收費方式</span>
+        <h2 id="pricing-title">配對成功才付費</h2>
+        <div class="plan-grid">
+          <article class="plan main" aria-labelledby="plan-biz">
+            <h3 id="plan-biz">提出需求的業者</h3>
+            <p class="price">配對成功後收媒合費</p>
+            <ul>
+              <li>刊登需求：不收費</li>
+              <li>送出邀請：不收費</li>
+              <li>雙方確認條件後，平台開立媒合費帳單</li>
+            </ul>
+            <p class="note">費率於帳單上列明。</p>
+            <a class="button" href="signup.html?role=business">提出短期人力需求</a>
+          </article>
+          <article class="plan" aria-labelledby="plan-pro">
+            <h3 id="plan-pro">有空檔的專業人士</h3>
+            <p class="price">免費</p>
+            <ul><li>建立個人檔案</li><li>接受或婉拒邀請</li><li>無須支付媒合費</li></ul>
+          </article>
+          <article class="plan" aria-labelledby="plan-co">
+            <h3 id="plan-co">釋出淡季人力的企業</h3>
+            <p class="price">免費</p>
+            <ul><li>登錄可支援人力</li><li>收到邀請再評估</li><li>無須支付媒合費</li></ul>
+          </article>
+        </div>
+        <ol class="pay-flow" role="list" aria-label="付款流程">
+          <li><strong>1. 何時收費</strong>供給方接受邀請、雙方確認條件後，平台才向提出需求的業者開立媒合費帳單。</li>
+          <li><strong>2. 如何付款</strong>第一版採銀行轉帳，請依帳單資訊付款。</li>
+          <li><strong>3. 何時能聯絡</strong>平台確認入帳後，才會向雙方開放聯絡方式。</li>
+        </ol>
       </div>
     </section>
 
-    <section class="faq container" id="faq" aria-labelledby="faq-title">
-      <div class="faq-grid">
-        <h2 id="faq-title">常見問題</h2>
+    <section class="proof container" aria-labelledby="proof-title">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">成果展示</span>
+          <h2 id="proof-title">上線後的成果 <span class="placeholder-tag">示意</span></h2>
+        </div>
+        <p>平台尚未上線。以下數字與回饋皆為版面示意，上線後將替換為真實資料。</p>
+      </div>
+      <ul class="stat-grid" role="list">
+        <li><b>000 位</b>已登錄的專業人士 <span class="placeholder-tag">示意</span></li>
+        <li><b>00 家</b>釋出淡季人力的企業 <span class="placeholder-tag">示意</span></li>
+        <li><b>00 件</b>成功配對 <span class="placeholder-tag">示意</span></li>
+      </ul>
+      <div class="quote-grid">
+        <figure>
+          <blockquote>「這裡放業者的真實使用回饋。」</blockquote>
+          <figcaption>業者名稱、產業 <span class="placeholder-tag">示意</span></figcaption>
+        </figure>
+        <figure>
+          <blockquote>「這裡放專業人士或企業的真實使用回饋。」</blockquote>
+          <figcaption>供給方名稱、職能 <span class="placeholder-tag">示意</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="faq-aside">
+          <h2 id="faq-title">常見問題</h2>
+          <p>找不到答案？先註冊後提出需求，或回到上方查看媒合流程。</p>
+          <a class="button" href="#how">查看媒合流程</a>
+        </div>
         <div>
           <details>
             <summary>需要註冊會員才能使用嗎？</summary>
@@ -433,15 +737,83 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
         </div>
       </div>
     </section>
+
+    <section class="cta-band" aria-labelledby="cta-title">
+      <div class="container">
+        <div>
+          <h2 id="cta-title">短期缺人？現在就提出需求</h2>
+          <p>刊登免費，配對成功才付費。</p>
+        </div>
+        <div class="button-row">
+          <a class="button" href="signup.html?role=business">提出短期人力需求</a>
+          <a class="button ghost" href="#roles">我是供給方</a>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="footer">
     <div class="container">
-      <a class="brand" href="#top">閒置人力媒合平台 <small>（暫名）</small></a>
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#top">閒置人力媒合平台 <small>（暫名）</small></a>
+          <p>為台灣中小企業媒合有空檔的專業人士與企業淡季人力。</p>
+        </div>
+        <nav aria-labelledby="f-biz">
+          <h2 id="f-biz">給業者</h2>
+          <ul>
+            <li><a href="signup.html?role=business">提出短期人力需求</a></li>
+            <li><a href="#categories">服務類別</a></li>
+            <li><a href="#pricing">收費方式</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="f-sup">
+          <h2 id="f-sup">給供給方</h2>
+          <ul>
+            <li><a href="signup.html?role=professional">建立個人檔案</a></li>
+            <li><a href="signup.html?role=company">登錄淡季人力</a></li>
+            <li><a href="#how">媒合流程</a></li>
+          </ul>
+        </nav>
+        <nav aria-labelledby="f-help">
+          <h2 id="f-help">協助</h2>
+          <ul>
+            <li><a href="#faq">常見問題</a></li>
+            <li><a href="login.html">會員登入</a></li>
+          </ul>
+        </nav>
+      </div>
       <nav class="legal" aria-label="網站條款">
-        <a href="terms.html">服務條款</a>
-        <a href="privacy.html">隱私權政策</a>
+        <span>課堂練習專案・示意網站</span>
+        <span><a href="terms.html">服務條款</a>　<a href="privacy.html">隱私權政策</a></span>
       </nav>
     </div>
   </footer>
+  <script>
+    // Accessible tabs (roving tabindex, arrow keys) for hero roles and how-it-works
+    document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+      var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          var panel = document.getElementById(t.getAttribute('aria-controls'));
+          if (panel) panel.hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { select(tab, false); });
+        tab.addEventListener('keydown', function (e) {
+          var n = null;
+          if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+          else if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+          else if (e.key === 'Home') n = tabs[0];
+          else if (e.key === 'End') n = tabs[tabs.length - 1];
+          if (n) { e.preventDefault(); select(n, true); }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
