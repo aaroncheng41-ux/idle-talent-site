@@ -295,7 +295,34 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
   .invoice { padding: var(--space-lg); }
   .invoice div { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
 }
+/* CrystalizedBall decorative background (centre of hero) */
+.hero-ball {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20%; /* nudged right of true centre so the rim clears the headline/subtitle */
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+@media (min-width: 761px) and (max-width: 1300px) { .hero-ball { left: 34%; } }
+@media (max-width: 760px) {
+  /* stacked layout: keep the ball over the photo, below the copy and button */
+  .hero-ball { top: auto; left: 0; aspect-ratio: 4 / 3; width: 100%; }
+}
+.hero-ball[hidden] { display: none; }
+.hero-copy { position: relative; z-index: 1; }
   </style>
+  <link rel="stylesheet" href="assets/crystalized-ball/CrystalizedBall.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@19.2.0",
+      "react-dom/client": "https://esm.sh/react-dom@19.2.0/client?external=react",
+      "ogl": "https://esm.sh/ogl@1.0.11"
+    }
+  }
+  </script>
 </head>
 <body id="top">
   <a class="skip" href="#main">跳至主要內容</a>
@@ -314,6 +341,7 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
     <section class="hero container" aria-labelledby="hero-title">
       <div class="hero-scene">
         <img src="assets/hero.jpg" width="1280" height="720" alt="三人在綠色牆面前圍桌討論工作" fetchpriority="high">
+        <div class="hero-ball" id="hero-ball" aria-hidden="true"></div>
         <div class="hero-copy">
           <h1 id="hero-title">短期缺人，<br>找對的幫手</h1>
           <p>為台灣中小企業媒合有空檔的專業人士與企業淡季人力。</p>
@@ -442,5 +470,32 @@ details p { padding: 0 var(--space-xs) var(--space-lg); color: var(--muted); }
       </nav>
     </div>
   </footer>
+  <script type="module">
+    // Mount React Bits <CrystalizedBall /> as a decorative hero background.
+    // Hidden silently when WebGL2 is unavailable or a module fails to load.
+    const host = document.getElementById('hero-ball');
+    const hasWebGL2 = (() => {
+      try { return !!document.createElement('canvas').getContext('webgl2'); } catch (_) { return false; }
+    })();
+    if (host && hasWebGL2) {
+      Promise.all([
+        import('react'),
+        import('react-dom/client'),
+        import('./assets/crystalized-ball/CrystalizedBall.js')
+      ]).then(([React, { createRoot }, { default: CrystalizedBall }]) => {
+        createRoot(host).render(React.createElement(CrystalizedBall, {
+          preset: 'solar',
+          color: '#f4d9a0',
+          theme: 'dark',
+          size: 0.6,
+          particleCount: 8000,
+          interactive: true,
+          hoverStrength: 0.7
+        }));
+      }).catch(() => { host.hidden = true; });
+    } else if (host) {
+      host.hidden = true;
+    }
+  </script>
 </body>
 </html>
